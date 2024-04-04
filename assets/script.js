@@ -17,21 +17,35 @@ const slides = [
 	}
 ]
 
-let arrowLeft = document.querySelector(".arrow_left");
-arrowLeft.addEventListener('click', previous);
-let conter = 0
-function previous() {
-	conter--
-	let image = document.querySelector(".banner-img")
-	image.setAttribute("src", "./assets/images/slideshow/" + slides[conter].image)
+
+
+let counter = 0;
+const arrowLeft = document.querySelector(".arrow_left");
+const arrowRight = document.querySelector(".arrow_right");
+const dots = document.querySelectorAll('.dot');
+
+updateDots(counter);
+
+function updateDots(index) {
+    dots.forEach(dot => dot.classList.remove('dot_selected'));
+    dots[index].classList.add('dot_selected');
 }
-let arrowRight = document.querySelector(".arrow_right")
-arrowRight.addEventListener('click', next);
 
 function next() {
-	conter++
-	let image = document.querySelector(".banner-img")
-	image.setAttribute("src", "./assets/images/slideshow/" + slides[conter].image)
+    counter = (counter + 1) % slides.length;
+    updateBanner();
 }
 
+function previous() {
+    counter = (counter - 1 + slides.length) % slides.length;
+    updateBanner();
+}
 
+function updateBanner() {
+    const image = document.querySelector(".banner-img");
+    image.setAttribute("src", "./assets/images/slideshow/" + slides[counter].image);
+    updateDots(counter);
+}
+
+arrowLeft.addEventListener('click', previous);
+arrowRight.addEventListener('click', next);
