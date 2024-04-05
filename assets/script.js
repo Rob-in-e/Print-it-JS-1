@@ -23,7 +23,7 @@ let counter = 0;
 const arrowLeft = document.querySelector(".arrow_left");
 const arrowRight = document.querySelector(".arrow_right");
 const dots = document.querySelectorAll('.dot');
-
+const bannertagLine = document.querySelector('.tagLines')
 updateDots(counter);
 
 function updateDots(index) {
@@ -43,7 +43,9 @@ function previous() {
 
 function updateBanner() {
     const image = document.querySelector(".banner-img");
+	const tagLine = slides[counter].tagLine;
     image.setAttribute("src", "./assets/images/slideshow/" + slides[counter].image);
+	bannertagLine.innerHTML = slides[counter].tagLine;
     updateDots(counter);
 }
 
